@@ -6,11 +6,13 @@ import {
   Route
 } from "react-router-dom";
 import Banner from './components/Banner/Banner';
+import Footer from './components/Footer/Footer';
 const App = () => {
   return (
     <Router>
       <Navigation />
       <Banner />
+      <Footer />
       <br />
       <br />
       <br />
