@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import bg from '../../image/farming-tipps-back.jpg'
+import bg from '../../../images/farming-tipps-back.jpg'
 const useStyles = makeStyles({
     root: {
         height: 'calc(100vh - 80px)',

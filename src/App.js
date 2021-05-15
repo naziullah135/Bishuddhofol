@@ -1,30 +1,19 @@
 import React from 'react';
-import Navigation from './components/Navigation/Navigation';
+import Navigation from './components/Shared/Navigation/Navigation';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-import Banner from './components/Banner/Banner';
+import Home from './components/Home/Home';
 const App = () => {
   return (
     <Router>
       <Navigation />
-      <Banner />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <Switch>
-
+        <Route exact path='/' component={Home} />
       </Switch>
     </Router>
   );
-};
-
+}
 export default App;

@@ -22,7 +22,7 @@ const scrollNavItems = [
     },
     {
         label: 'Shop',
-        path: ''
+        path: 'shop'
     },
     {
         label: 'About us',
