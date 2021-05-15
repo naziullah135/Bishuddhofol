@@ -12,10 +12,18 @@ import { Button, Container } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll';
 import useStyles from './NavigationStyle';
-import { ArrowBack, ArrowUpward } from '@material-ui/icons';
+import { ArrowUpward } from '@material-ui/icons';
 
 
 const scrollNavItems = [
+    {
+        label: 'About us',
+        path: ''
+    },
+    {
+        label: 'Shop',
+        path: ''
+    },
     {
         label: 'About us',
         path: ''
