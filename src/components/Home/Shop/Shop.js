@@ -20,17 +20,12 @@ const Shop = () => {
                   />
                 </div>
                 <div style={{ padding: 15, textAlign: 'center' }}>
-                  <Typography variant="h3"> {name}</Typography>
+                  <Typography variant="h4"> {name}</Typography>
                   <p>{des}</p>
 
-                  <Typography variant="h4">মূল্য: ৳ {price}</Typography>
+                  <Counter price={price} />
 
-                  <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', margin: '20px 0' }}>
-                    <Typography variant="h5">পরিমান(KG): </Typography>
-                    <Counter />
-                  </div>
-
-                  <Button variant="contained" color="secondary">
+                  <Button variant="contained" style={{ background: '#58BC34', color: '#fff', fontWeight: 700 }}>
                     Add to cart
                 </Button>
                 </div>

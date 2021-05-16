@@ -13,8 +13,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll';
 import useStyles from './NavigationStyle';
 import { ArrowUpward } from '@material-ui/icons';
-
-
+import AddShoppingCart from '@material-ui/icons/AddShoppingCartOutlined';
+import ShoppingCart from '@material-ui/icons/ShoppingCartOutlined';
 const scrollNavItems = [
     {
         label: 'About us',
@@ -155,6 +155,9 @@ const Navigation = () => {
                                         </Button>
                                     </ScrollLink>)
                             }
+                            <IconButton>
+                                <ShoppingCart style={{ color: '#a8a8a9' }} />
+                            </IconButton>
                         </span>
                     </div>
                 </Container>
