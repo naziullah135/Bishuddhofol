@@ -15,6 +15,7 @@ import useStyles from './NavigationStyle';
 import { ArrowUpward } from '@material-ui/icons';
 import AddShoppingCart from '@material-ui/icons/AddShoppingCartOutlined';
 import ShoppingCart from '@material-ui/icons/ShoppingCartOutlined';
+import { useMyContext } from '../../../context';
 const scrollNavItems = [
     {
         label: 'About us',
@@ -25,16 +26,13 @@ const scrollNavItems = [
         path: 'shop'
     },
     {
-        label: 'About us',
-        path: ''
-    },
-    {
         label: 'Contact us',
         path: ''
     },
 ]
 
 const Navigation = () => {
+
     const {
         root,
         appBar,
@@ -45,7 +43,11 @@ const Navigation = () => {
         link,
         navItemDrawer,
         navbarMain,
-        backToTop } = useStyles()
+        backToTop,
+        cartCount,
+        cartIcon } = useStyles()
+    const { cartItemCount, cartItems } = useMyContext();
+    // const cartItems = JSON.parse(localStorage.getItem('cart'));
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -99,7 +101,16 @@ const Navigation = () => {
     );
     return (
         <div className={root}>
-
+            <Link to="/cart">
+                <IconButton
+                    className={cartIcon}>
+                    {
+                        cartItemCount > 0 ?
+                            <ShoppingCart style={{ color: '#58BC34', fontSize: 40 }} /> :
+                            <AddShoppingCart style={{ color: '#58BC34', fontSize: 40 }} />
+                    } <span className={cartCount}>{cartItems ? cartItems.length : 0}</span>
+                </IconButton>
+            </Link>
             {scrollNav &&
                 <IconButton onClick={toggleHome} className={backToTop}>
                     <ArrowUpward style={{ color: '#fff' }} />
@@ -133,7 +144,7 @@ const Navigation = () => {
                         {drawer}
                     </Drawer>
                 </Hidden>
-                <Container className={navbar}>
+                <Container className={navbar} style={{ height: scrollNav ? 60 : 80 }}>
                     <img src='' onClick={toggleHome} style={{ maxWidth: 250, flex: 1, cursor: 'pointer' }} alt="Logo" />
                     <div style={{ flex: 3, textAlign: 'right' }}>
                         <span>
@@ -155,9 +166,6 @@ const Navigation = () => {
                                         </Button>
                                     </ScrollLink>)
                             }
-                            <IconButton>
-                                <ShoppingCart style={{ color: '#a8a8a9' }} />
-                            </IconButton>
                         </span>
                     </div>
                 </Container>

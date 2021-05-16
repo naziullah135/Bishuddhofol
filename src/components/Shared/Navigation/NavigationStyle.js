@@ -6,7 +6,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         background: 'rgba(0,0,0,.8)',
-        height: 80
     },
     link: {
         textDecoration: 'none',
@@ -33,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     navbar: {
         display: 'flex',
         alignItems: 'center',
-        height: 80,
+        // height: 80,
         [theme.breakpoints.down('sm')]: {
             width: drawerWidth,
             flexShrink: 0,
@@ -101,6 +100,26 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             background: 'rgba(0,0,0,1)'
         }
+    },
+    cartCount: {
+        position: 'absolute',
+        left: 47,
+        top: 5,
+        color: '#fff',
+        background: '#ff0000',
+        borderRadius: '50%',
+        fontSize: 16,
+        height: 20,
+        width: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontWeight: 700
+    },
+    cartIcon: {
+        position: 'fixed',
+        top: '50vh',
+        right: '5px'
     }
 }));
 
