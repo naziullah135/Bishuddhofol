@@ -13,7 +13,11 @@ const Shop = () => {
               <Paper>
                 <div>
                   <img
-                    style={{ width: "100%", height: "300px" }}
+                    style={{
+                      width: "100%",
+                      height: "300px",
+                      objectFit: "cover",
+                    }}
                     src={img}
                     alt=""
                   />

@@ -1,12 +1,26 @@
-import "./App.css";
+import React from "react";
+import Navigation from "./components/Navigation/Navigation";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Banner from "./components/Banner/Banner";
 import Shop from "./components/Shop/Shop";
-
-function App() {
+const App = () => {
   return (
-    <div>
+    <Router>
+      <Navigation />
+      <Banner />
       <Shop />
-    </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <Switch></Switch>
+    </Router>
   );
-}
+};
 
 export default App;
