@@ -9,15 +9,16 @@ export const useMyContext = () => {
 
 export const ContextProvider = ({ children }) => {
 
-    const [cartItemCount, setCartItemCount] = useState(0);
+    // const [cartItems, setCartItems] = useState([])
+    // useEffect(() => {
+    //     const carts = JSON.parse(localStorage.getItem('cart')) || [];
+    //     setCartItems(carts)
+    // }, [cartItems])
 
 
     const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    // const [cartItems, setCartItems] = useState(carts);
-    // useEffect(() => {
-    //     setCartItems(carts);
-    // }, [carts])
 
+    const [cartItemCount, setCartItemCount] = useState(cartItems);
     const value = {
         cartItemCount,
         setCartItemCount,

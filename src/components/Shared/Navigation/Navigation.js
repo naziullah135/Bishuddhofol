@@ -47,6 +47,7 @@ const Navigation = () => {
         cartCount,
         cartIcon } = useStyles()
     const { cartItemCount, cartItems } = useMyContext();
+    console.log(cartItemCount);
     // const cartItems = JSON.parse(localStorage.getItem('cart'));
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
@@ -83,17 +84,23 @@ const Navigation = () => {
             <Divider />
             {
                 scrollNavItems.map(({ label, path }) =>
-                    <ScrollLink key={label} className={link} to={path}
+                    <ScrollLink
+                        key={label}
+                        className={link}
+                        to={path}
                         spy={true}
                         smooth={true}
                         exact='true'
-                        offset={-15}
+                        offset={0}
                         duration={500}>
-                        <ListItem button
-                            className={navItemDrawer}
-                        >
-                            <ListItemText primary={label} />
-                        </ListItem>
+                        <Link style={{ textDecoration: 'none' }} to='/'>
+                            <ListItem
+                                button
+                                className={navItemDrawer}
+                            >
+                                <ListItemText primary={label} />
+                            </ListItem>
+                        </Link>
                         <Divider />
                     </ScrollLink>)
             }
@@ -105,7 +112,7 @@ const Navigation = () => {
                 <IconButton
                     className={cartIcon}>
                     {
-                        cartItemCount > 0 ?
+                        cartItemCount.length > 0 ?
                             <ShoppingCart style={{ color: '#58BC34', fontSize: 40 }} /> :
                             <AddShoppingCart style={{ color: '#58BC34', fontSize: 40 }} />
                     } <span className={cartCount}>{cartItems ? cartItems.length : 0}</span>
@@ -159,11 +166,13 @@ const Navigation = () => {
                                         spy={true}
                                         smooth={true}
                                         exact='true'
-                                        offset={-15}
+                                        offset={0}
                                         duration={500}>
-                                        <Button>
-                                            <span className={navItem}>{label}</span>
-                                        </Button>
+                                        <Link style={{ textDecoration: 'none' }} to='/'>
+                                            <Button>
+                                                <span className={navItem}>{label}</span>
+                                            </Button>
+                                        </Link>
                                     </ScrollLink>)
                             }
                         </span>
