@@ -1,11 +1,13 @@
 import { Container, Grid } from "@material-ui/core";
-import img from "../../images/static.jpg";
+import img from "../../../images/static.jpg";
 import React from "react";
+import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 
 const About = () => {
   return (
     <section>
       <Container>
+        <SectionTitle text="ABOUT US" />
         <Grid container spacing={3}>
           <Grid item lg={8} md={8} sm={6} xs={12}>
             <iframe
