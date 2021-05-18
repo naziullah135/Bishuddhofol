@@ -12,7 +12,7 @@ const useStyle = makeStyles({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        // margin: '10px 0'
+        margin: '15px 0'
     }
 })
 const SingleFruit = ({ foodItem }) => {
@@ -41,9 +41,9 @@ const SingleFruit = ({ foodItem }) => {
             </div>
             <div style={{ padding: 15, textAlign: 'center' }}>
                 <h1 style={{ fontSize: 30 }}> {name}</h1>
-                <p>{des}</p>
+                <p style={{ margin: '10px 0' }}>{des}</p>
                 {isClicked ?
-                    <h2>এই ফলটি কার্টে যোগ হয়েছে। কার্ট পেজ এ গিয়ে অর্ডার করুন। ধন্যবাদ।</h2> :
+                    <h2 style={{ margin: '20px 0 25px 0' }}>এই ফলটি কার্টে যোগ হয়েছে। কার্ট পেজ এ গিয়ে অর্ডার করুন। ধন্যবাদ।</h2> :
                     <>
                         <h2>মূল্য: ৳ {price * count}</h2>
                         <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', }}>

@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cartIcon: {
         position: 'fixed',
-        top: '50vh',
+        top: '30vh',
         right: '5px'
     }
 }));

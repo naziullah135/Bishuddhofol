@@ -1,12 +1,12 @@
 import { Container, Grid } from "@material-ui/core";
-import img from "../../images/static.jpg";
+import img from "../../../images/static.jpg";
 import React from "react";
 
 const About = () => {
   return (
     <section>
       <Container>
-        <Grid container spacing={3}>
+        <Grid container>
           <Grid item lg={8} md={8} sm={6} xs={12}>
             <iframe
               width="100%"
@@ -19,7 +19,7 @@ const About = () => {
             ></iframe>
           </Grid>
           <Grid item lg={4} md={4} sm={6} xs={12}>
-            <img src={img} style={{ width: "100%", height: "400px" }} alt="" />
+            <img src={img} style={{ width: "100%", height: "auto" }} alt="" />
           </Grid>
         </Grid>
       </Container>

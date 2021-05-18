@@ -1,24 +1,15 @@
-import { Container, IconButton, Table, TableBody, TableCell, TableContainer, TableRow, Button } from '@material-ui/core';
+import { Container, IconButton, Table, TableBody, TableCell, TableContainer, TableRow, Button, Typography } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../../context';
 import CartSingle from './CartSingle';
 const Cart = () => {
     const { cartItems } = useMyContext();
-    // const removeCartItem = (e, id) => {
-    //     const cartItems = JSON.parse(localStorage.getItem('cart'));
-    //     const newCart = cartItems.filter(item => item.id !== id)
-    //     localStorage.setItem('cart', JSON.stringify(newCart));
-    //     let removeItem = e.target.parentElement.parentElement;
-    //     for (let i = 1; i <= 4; i++) {
-    //         if (removeItem.tagName === 'TR') {
-    //             removeItem.style.display = 'none';
-    //         } else {
-    //             removeItem = removeItem.parentElement;
-    //         }
-    //     }
-
-    // }
+    const deliveryCharge = 20;
+    const getSubTotal = () => {
+        return cartItems.reduce((acc, item) => (item.quantity * item.price) + acc, 0)
+    }
+    const getTotal = () => getSubTotal() + deliveryCharge;
     return (
         <Container style={{ marginTop: 80 }}>
             <TableContainer>
@@ -29,12 +20,44 @@ const Cart = () => {
                                 <CartSingle
                                     key={item.id}
                                     item={item}
-                                // removeCartItem={removeCartItem} 
                                 />)
                         }
                     </TableBody>
                 </Table>
             </TableContainer>
+            <section style={{ margin: '100px 0' }}>
+                <Typography variant="h4">Cart total</Typography>
+                <TableContainer>
+                    <Table >
+                        <TableBody width="100%">
+                            <TableRow>
+                                <TableCell>
+                                    <Typography variant="h5">SUBTOTAL</Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h5">৳ {getSubTotal().toFixed(2)}</Typography>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Typography variant="h5">DELIVERY CHARGE</Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h5">৳ {deliveryCharge.toFixed(2)}</Typography>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Typography variant="h5">TOTAL</Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h5">৳ {getTotal().toFixed(2)}</Typography>
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </section>
         </Container>
     );
 };
