@@ -1,6 +1,6 @@
 footer {
   display: grid;
-  justify-content: end;
+  justify-content: center;
   min-height: 60vh;
   align-content: end;
   position: relative;

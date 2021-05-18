@@ -6,9 +6,9 @@ import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 
 const Shop = () => {
   return (
-    <section id="shop">
+    <section id="shop" style={{ marginBottom: 50 }}>
       <Container>
-        <SectionTitle text="SHOP" />
+        <SectionTitle title="SHOP" slogan="Best Organic Fruits" />
         <Grid container spacing={5} justify="center">
           {cardData.map((foodItem) => (
             <Grid item key={foodItem.id} lg={4} md={4} sm={6} xs={12}>

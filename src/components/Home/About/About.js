@@ -1,15 +1,17 @@
 import { Container, Grid } from "@material-ui/core";
-import img from "../../../images/static.jpg";
+import img from "../../../images/about.jpg";
 import React from "react";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 
 const About = () => {
   return (
-    <section>
+    <section id="about-us">
       <Container>
+        <SectionTitle title="ABOUT US" slogan="We Provide Better" />
         <Grid container>
           <Grid item lg={8} md={8} sm={6} xs={12}>
             <iframe
+              style={{ paddingBottom: 5 }}
               width="100%"
               height="100%"
               src="https://www.youtube.com/embed/wf3WqjSBqXM"

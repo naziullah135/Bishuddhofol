@@ -31,7 +31,7 @@ const SingleFruit = ({ foodItem }) => {
     // const cartItems = JSON.parse(localStorage.getItem('cart'));
     const [isClicked, setIsClicked] = useState(cartItems.find(item => item.id === id));
     return (
-        <Paper elevation={2} style={{ minHeight: 500 }}>
+        <Paper elevation={2} style={{ minHeight: 490 }}>
             <div>
                 <img
                     style={{ width: "100%", height: "220px", objectFit: 'cover' }}
@@ -39,7 +39,7 @@ const SingleFruit = ({ foodItem }) => {
                     alt=""
                 />
             </div>
-            <div style={{ padding: 15, textAlign: 'center' }}>
+            <div style={{ padding: '5px 15px 15px', textAlign: 'center' }}>
                 <h1 style={{ fontSize: 30 }}> {name}</h1>
                 <p style={{ margin: '10px 0' }}>{des}</p>
                 {isClicked ?
@@ -62,7 +62,7 @@ const SingleFruit = ({ foodItem }) => {
                     }}
                     disabled={isClicked}
                     variant="contained"
-                    style={{ background: isClicked ? '#ddd' : '#58BC34', color: '#fff', fontWeight: 700 }}>
+                    style={{ background: isClicked ? '#ddd' : '#059033', color: '#fff', fontWeight: 700 }}>
                     {isClicked ? '✔ Already added' : 'Add to cart'}
                 </Button>
             </div>

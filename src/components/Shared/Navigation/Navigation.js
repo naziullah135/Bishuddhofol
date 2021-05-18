@@ -19,7 +19,7 @@ import { useMyContext } from '../../../context';
 const scrollNavItems = [
     {
         label: 'About us',
-        path: ''
+        path: 'about-us'
     },
     {
         label: 'Shop',
@@ -91,7 +91,7 @@ const Navigation = () => {
                         spy={true}
                         smooth={true}
                         exact='true'
-                        offset={0}
+                        offset={60}
                         duration={500}>
                         <Link style={{ textDecoration: 'none' }} to='/'>
                             <ListItem
@@ -113,8 +113,8 @@ const Navigation = () => {
                     className={cartIcon}>
                     {
                         cartItemCount.length > 0 ?
-                            <ShoppingCart style={{ color: '#58BC34', fontSize: 40 }} /> :
-                            <AddShoppingCart style={{ color: '#58BC34', fontSize: 40 }} />
+                            <ShoppingCart style={{ color: '#059033', fontSize: 40 }} /> :
+                            <AddShoppingCart style={{ color: '#059033', fontSize: 40 }} />
                     } <span className={cartCount}>{cartItems ? cartItems.length : 0}</span>
                 </IconButton>
             </Link>
@@ -166,7 +166,7 @@ const Navigation = () => {
                                         spy={true}
                                         smooth={true}
                                         exact='true'
-                                        offset={0}
+                                        offset={-85}
                                         duration={500}>
                                         <Link style={{ textDecoration: 'none' }} to='/'>
                                             <Button>

@@ -1,29 +1,33 @@
 .title-text {
   text-align: center;
-  padding-bottom: 70px;
+  margin: 60px 0 10px 0;
 }
 .title-text h2 {
   margin: auto;
-  font-size: 50px;
-  color: #222222;
-  font-weight: bold;
+  font-size: 25px;
+  color: #059033;
+  font-weight: 700;
   position: relative;
   z-index: 1;
   display: inline-block;
+  font-family: "Antonio", sans-serif;
 }
+
 .title-text h2::after {
+  /* background: linear-gradient(#059033, #99e499); */
   content: "";
   width: 50px;
   height: 35px;
-  background: linear-gradient(#222222, #fff);
+  background: linear-gradient(#059033, #fff);
   position: absolute;
   top: -20px;
-  left: 0;
+  left: 5px;
   z-index: -1;
   transform: rotate(10deg);
   border-top-left-radius: 35px;
   border-bottom-right-radius: 35px;
 }
 .title-text h1 {
-  font-size: 50px;
+  font-size: 40px;
+  font-family: "Kaushan Script", cursive;
 }

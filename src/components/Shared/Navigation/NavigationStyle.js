@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         justifyContent: 'space-between',
         zIndex: 999,
-        background: 'rgba(0,0,0,.8)',
+        background: 'rgba(0,0,0,.9)',
     },
     appBar: {
         background: 'rgba(0,0,0,.8)',
@@ -95,10 +95,11 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         right: 30,
         bottom: 30,
-        background: 'rgba(0,0,0,.8)',
+        zIndex: 5,
+        background: 'rgba(5, 144, 51,.7)',
         transition: '.3s linear',
         '&:hover': {
-            background: 'rgba(0,0,0,1)'
+            background: '#059033'
         }
     },
     cartCount: {
