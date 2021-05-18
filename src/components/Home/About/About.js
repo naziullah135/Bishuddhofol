@@ -1,6 +1,7 @@
 import { Container, Grid } from "@material-ui/core";
 import img from "../../../images/static.jpg";
 import React from "react";
+import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 
 const About = () => {
   return (
