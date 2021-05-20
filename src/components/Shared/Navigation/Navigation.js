@@ -111,7 +111,7 @@ const Navigation = () => {
                 <IconButton
                     className={cartIcon}>
                     {
-                        cartItemCount.length > 0 ?
+                        cartItems.length > 0 ?
                             <ShoppingCart style={{ color: '#059033', fontSize: 40 }} /> :
                             <AddShoppingCart style={{ color: '#059033', fontSize: 40 }} />
                     } <span className={cartCount}>{cartItems ? cartItems.length : 0}</span>

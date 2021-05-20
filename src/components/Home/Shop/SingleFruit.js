@@ -1,5 +1,5 @@
 import { Button, makeStyles, Paper, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { useMyContext } from '../../../context';
@@ -24,7 +24,7 @@ const SingleFruit = ({ foodItem }) => {
     const [count, setCount] = useState(quantity);
     const [previousCart, setPreviousCart] = useState([])
     // foodItem.quantity = count;
-    const { setCartItemCount, cartItems } = useMyContext();
+    // const { setCartItemCount, cartItems } = useMyContext();
     const updateCart = () => {
         const cartId = localStorage.getItem('cartId');
         if (!cartId) {
@@ -39,11 +39,9 @@ const SingleFruit = ({ foodItem }) => {
                 })
         }
         if (cartId) {
-            console.log(cartId);
-            axios.get(`http://localhost:5000/cart/${cartId}`)
+            axios.patch(`http://localhost:5000/updateCart/${cartId}`, { ...foodItem, quantity: count })
                 .then(res => {
-                    setPreviousCart(res.data)
-                    console.log(res.data);
+                    console.log(res, 'hello');
                 })
         }
 
@@ -53,7 +51,22 @@ const SingleFruit = ({ foodItem }) => {
         // setCartItemCount(newCart);
     }
     // const cartItems = JSON.parse(localStorage.getItem('cart'));
-    const [isClicked, setIsClicked] = useState(cartItems.find(item => item.id === id));
+
+    const [cartItems, setCartItems] = useState([])
+    const [disabled, setDisabled] = useState(null);
+    const cartId = localStorage.getItem('cartId');
+    useEffect(() => {
+        if (cartId) {
+            axios.get(`http://localhost:5000/cart/${cartId}`)
+                .then(res => {
+                    setCartItems(res.data?.[0].cartItems);
+                })
+        }
+    }, [cartId])
+    useEffect(() => {
+        setDisabled(cartItems.find(item => item.id === id))
+    }, [cartItems])
+    console.log(cartItems, disabled);
     return (
         <Paper elevation={2} style={{ minHeight: 490 }}>
             <div>
@@ -66,7 +79,7 @@ const SingleFruit = ({ foodItem }) => {
             <div style={{ padding: '5px 15px 15px', textAlign: 'center' }}>
                 <h1 style={{ fontSize: 30 }}> {name}</h1>
                 <p style={{ margin: '10px 0' }}>{des}</p>
-                {isClicked ?
+                {disabled ?
                     <h2 style={{ margin: '20px 0 25px 0' }}>এই ফলটি কার্টে যোগ হয়েছে। কার্ট পেজ এ গিয়ে অর্ডার করুন। ধন্যবাদ।</h2> :
                     <>
                         <h2>মূল্য: ৳ {price * count}</h2>
@@ -82,12 +95,12 @@ const SingleFruit = ({ foodItem }) => {
                 <Button
                     onClick={() => {
                         updateCart();
-                        setIsClicked(true);
+                        setDisabled(true);
                     }}
-                    disabled={isClicked}
+                    disabled={disabled}
                     variant="contained"
-                    style={{ background: isClicked ? '#ddd' : '#059033', color: '#fff', fontWeight: 700 }}>
-                    {isClicked ? '✔ Already added' : 'Add to cart'}
+                    style={{ background: disabled ? '#ddd' : '#059033', color: '#fff', fontWeight: 700 }}>
+                    {disabled ? '✔ Already added' : 'Add to cart'}
                 </Button>
             </div>
         </Paper>

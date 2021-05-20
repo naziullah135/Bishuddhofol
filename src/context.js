@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react"
 
 
@@ -14,9 +15,18 @@ export const ContextProvider = ({ children }) => {
     //     const carts = JSON.parse(localStorage.getItem('cart')) || [];
     //     setCartItems(carts)
     // }, [cartItems])
+    const [cartItems, setCartItems] = useState([])
+    const cartId = localStorage.getItem('cartId');
+    useEffect(() => {
+        if (cartId) {
+            axios.get(`http://localhost:5000/cart/${cartId}`)
+                .then(res => {
+                    setCartItems(res.data?.[0].cartItems)
+                })
+        }
+    }, [cartId])
 
-
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    // const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
     const [cartItemCount, setCartItemCount] = useState(cartItems);
     const value = {
