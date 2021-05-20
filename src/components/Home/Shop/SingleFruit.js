@@ -22,51 +22,16 @@ const SingleFruit = ({ foodItem }) => {
 
     const { id, img, name, price, des, quantity } = foodItem;
     const [count, setCount] = useState(quantity);
-    const [previousCart, setPreviousCart] = useState([])
-    // foodItem.quantity = count;
-    // const { setCartItemCount, cartItems } = useMyContext();
+    const { setCartItemCount } = useMyContext();
     const updateCart = () => {
-        const cartId = localStorage.getItem('cartId');
-        if (!cartId) {
-            const newCartId = uuid();
-            const cartData = {
-                cartId: newCartId,
-                cartItems: [{ ...foodItem, quantity: count, }]
-            }
-            axios.post('http://localhost:5000/addToCart', cartData)
-                .then(res => {
-                    res.data && localStorage.setItem('cartId', newCartId);
-                })
-        }
-        if (cartId) {
-            axios.patch(`http://localhost:5000/updateCart/${cartId}`, { ...foodItem, quantity: count })
-                .then(res => {
-                    console.log(res, 'hello');
-                })
-        }
-
-        // const cartData = JSON.parse(localStorage.getItem('cart')) || [];
-        // const newCart = [...cartData, { ...foodItem, quantity: count }]
-        // localStorage.setItem('cart', JSON.stringify(newCart))
-        // setCartItemCount(newCart);
+        const cartItems = { id, quantity: count };
+        const previousCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+        localStorage.setItem('cartItems', JSON.stringify([...previousCart, cartItems]))
+        setCartItemCount(pre => pre + 1)
     }
-    // const cartItems = JSON.parse(localStorage.getItem('cart'));
+    const cartData = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const [disabled, setDisabled] = useState(cartData.find(item => item.id === id) && true);
 
-    const [cartItems, setCartItems] = useState([])
-    const [disabled, setDisabled] = useState(null);
-    const cartId = localStorage.getItem('cartId');
-    useEffect(() => {
-        if (cartId) {
-            axios.get(`http://localhost:5000/cart/${cartId}`)
-                .then(res => {
-                    setCartItems(res.data?.[0].cartItems);
-                })
-        }
-    }, [cartId])
-    useEffect(() => {
-        setDisabled(cartItems.find(item => item.id === id))
-    }, [cartItems])
-    console.log(cartItems, disabled);
     return (
         <Paper elevation={2} style={{ minHeight: 490 }}>
             <div>

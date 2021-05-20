@@ -46,8 +46,7 @@ const Navigation = () => {
         backToTop,
         cartCount,
         cartIcon } = useStyles()
-    const { cartItemCount, cartItems } = useMyContext();
-    // const cartItems = JSON.parse(localStorage.getItem('cart'));
+    const { cartItemCount } = useMyContext();
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -111,10 +110,10 @@ const Navigation = () => {
                 <IconButton
                     className={cartIcon}>
                     {
-                        cartItems.length > 0 ?
+                        cartItemCount > 0 ?
                             <ShoppingCart style={{ color: '#059033', fontSize: 40 }} /> :
                             <AddShoppingCart style={{ color: '#059033', fontSize: 40 }} />
-                    } <span className={cartCount}>{cartItems ? cartItems.length : 0}</span>
+                    } <span className={cartCount}>{cartItemCount}</span>
                 </IconButton>
             </Link>
             {scrollNav &&

@@ -1,13 +1,33 @@
 import { Container, IconButton, Table, TableBody, TableCell, TableContainer, TableRow, Button, Typography } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../../context';
 import CartSingle from './CartSingle';
 const Cart = () => {
     const { cartItems } = useMyContext();
+    // const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    // const cartItemsId = cartItems.map(item => item.id);
+    const [cartData, setCartData] = useState([])
+
+    useEffect(() => {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const cartItemsId = cartItems.map(item => item.id);
+        axios.post('http://localhost:5000/fruitsById', cartItemsId)
+            .then(res => {
+                setCartData(res.data)
+            })
+    }, [cartItems])
     const deliveryCharge = 20;
+    console.log(cartData);
+    // update quantity 
+    cartData.map(item => {
+        cartItems.map(cartItem => (item.id === cartItem.id) && (item.quantity = cartItem.quantity))
+        return item;
+    })
+    console.log(cartData);
     const getSubTotal = () => {
-        return cartItems.reduce((acc, item) => (item.quantity * item.price) + acc, 0)
+        return cartData.reduce((acc, item) => (item.quantity * item.price) + acc, 0)
     }
     const getTotal = () => getSubTotal() + deliveryCharge;
     return (
@@ -16,7 +36,7 @@ const Cart = () => {
                 <Table>
                     <TableBody>
                         {
-                            cartItems.map(item =>
+                            cartData.map(item =>
                                 <CartSingle
                                     key={item.id}
                                     item={item}
