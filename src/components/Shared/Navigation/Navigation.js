@@ -47,7 +47,6 @@ const Navigation = () => {
         cartCount,
         cartIcon } = useStyles()
     const { cartItemCount, cartItems } = useMyContext();
-    console.log(cartItemCount);
     // const cartItems = JSON.parse(localStorage.getItem('cart'));
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {

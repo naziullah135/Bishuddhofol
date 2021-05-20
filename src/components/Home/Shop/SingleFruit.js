@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { useMyContext } from '../../../context';
+import { v4 as uuid } from 'uuid';
+import axios from 'axios';
 const useStyle = makeStyles({
 
     counterSection: {
@@ -20,13 +22,35 @@ const SingleFruit = ({ foodItem }) => {
 
     const { id, img, name, price, des, quantity } = foodItem;
     const [count, setCount] = useState(quantity);
+    const [previousCart, setPreviousCart] = useState([])
     // foodItem.quantity = count;
     const { setCartItemCount, cartItems } = useMyContext();
     const updateCart = () => {
-        const cartData = JSON.parse(localStorage.getItem('cart')) || [];
-        const newCart = [...cartData, { ...foodItem, quantity: count }]
-        localStorage.setItem('cart', JSON.stringify(newCart))
-        setCartItemCount(newCart);
+        const cartId = localStorage.getItem('cartId');
+        if (!cartId) {
+            const newCartId = uuid();
+            const cartData = {
+                cartId: newCartId,
+                cartItems: [{ ...foodItem, quantity: count, }]
+            }
+            axios.post('http://localhost:5000/addToCart', cartData)
+                .then(res => {
+                    res.data && localStorage.setItem('cartId', newCartId);
+                })
+        }
+        if (cartId) {
+            console.log(cartId);
+            axios.get(`http://localhost:5000/cart/${cartId}`)
+                .then(res => {
+                    setPreviousCart(res.data)
+                    console.log(res.data);
+                })
+        }
+
+        // const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+        // const newCart = [...cartData, { ...foodItem, quantity: count }]
+        // localStorage.setItem('cart', JSON.stringify(newCart))
+        // setCartItemCount(newCart);
     }
     // const cartItems = JSON.parse(localStorage.getItem('cart'));
     const [isClicked, setIsClicked] = useState(cartItems.find(item => item.id === id));
