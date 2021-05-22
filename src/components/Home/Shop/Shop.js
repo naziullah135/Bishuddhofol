@@ -16,9 +16,9 @@ const Shop = () => {
     <section id="shop" style={{ marginBottom: 50 }}>
       <Container>
         <SectionTitle title="SHOP" slogan="Best Organic Fruits" />
-        <Grid container spacing={5} justify="center">
+        <Grid container spacing={2} justify="center">
           {fruits.map((foodItem) => (
-            <Grid item key={foodItem.id} lg={4} md={4} sm={6} xs={12}>
+            <Grid item key={foodItem.id} lg={3} md={4} sm={6} xs={6}>
               <SingleFruit foodItem={foodItem} />
             </Grid>
           ))}
