@@ -28,11 +28,14 @@ export const ContextProvider = ({ children }) => {
 
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
+    const [updatedCart, setUpdatedCart] = useState([])
     const [cartItemCount, setCartItemCount] = useState(cartItems.length || 0);
     const value = {
         cartItemCount,
         setCartItemCount,
-        cartItems
+        cartItems,
+        updatedCart,
+        setUpdatedCart
     }
     return (
         <MyContext.Provider value={value}>

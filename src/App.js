@@ -8,6 +8,7 @@ import {
 import Home from './components/Home/Home';
 import { ContextProvider } from './context';
 import Cart from './components/Cart/Cart';
+import Checkout from './components/Checkout/Checkout';
 const App = () => {
   return (
     <ContextProvider>
@@ -16,6 +17,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/checkout" component={Checkout} />
         </Switch>
       </Router>
     </ContextProvider>

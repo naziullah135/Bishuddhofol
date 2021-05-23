@@ -35,22 +35,22 @@ const SingleFruit = ({ foodItem }) => {
     const [disabled, setDisabled] = useState(cartData.find(item => item.id === id) && true);
 
     return (
-        <Paper elevation={2} style={{ minHeight: 410 }}>
+        <Paper elevation={2} style={{ minHeight: 370, maxWidth: 250, margin: '0 auto' }}>
             <div>
                 <img
-                    style={{ width: "100%", height: "200px", objectFit: 'cover' }}
+                    style={{ width: "100%", height: "160px", objectFit: 'cover' }}
                     src={img}
                     alt=""
                 />
             </div>
-            <div style={{ padding: '5px 15px 15px', display: 'flex', height: '100%', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '5px 15px 15px', display: 'flex', height: 220, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h1 style={{ fontSize: 30 }}> {name}</h1>
                 {disabled ?
-                    <h3 className={addedMsg}>ফলটি কার্টে যোগ হয়েছে।</h3> :
+                    <h3 className={addedMsg}>কার্টে যোগ করা হয়েছে।</h3> :
                     <>
                         <h2>Tk. {price * count}</h2>
                         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', alignItems: 'center', }}>
-                            <p style={{ fontSize: 18 }}>Weight(kg): </p>
+                            <p style={{ fontSize: 18 }}>Weight(kg)</p>
                             <span className={counterSection}>
                                 <Button onClick={() => setCount(count > 5 ? count - 1 : 5)} ><RemoveIcon /></Button>
                                 <span style={{ fontSize: 20 }}>{count}</span>
@@ -66,7 +66,7 @@ const SingleFruit = ({ foodItem }) => {
                     disabled={disabled}
                     className={addToCartBtn}
                     variant="outlined"
-                    style={{ borderColor: disabled ? '#ddd' : '#059033', }}>
+                    style={{ borderColor: disabled ? '#ddd' : '#059033' }}>
                     {disabled || <AddShoppingCart />}
                     {disabled ? '✔ Added' : `Add to cart`}
                 </Button>

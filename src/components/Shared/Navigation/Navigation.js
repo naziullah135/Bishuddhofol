@@ -16,6 +16,7 @@ import { ArrowUpward } from '@material-ui/icons';
 import AddShoppingCart from '@material-ui/icons/AddShoppingCartOutlined';
 import ShoppingCart from '@material-ui/icons/ShoppingCartOutlined';
 import { useMyContext } from '../../../context';
+import logo from '../../../images/logo.png'
 const scrollNavItems = [
     {
         label: 'About us',
@@ -45,7 +46,10 @@ const Navigation = () => {
         navbarMain,
         backToTop,
         cartCount,
-        cartIcon } = useStyles()
+        cartIconLarge,
+        cartIconSmall,
+        cartCountLarge,
+        cartCountSmall } = useStyles()
     const { cartItemCount } = useMyContext();
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
@@ -70,7 +74,7 @@ const Navigation = () => {
 
     const drawer = (
         <div style={{ textAlign: 'center' }}>
-            <img src='' onClick={toggleHome} style={{ maxWidth: '90%', margin: '20px auto' }} alt="Logo" />
+            <img src={logo} onClick={toggleHome} style={{ maxWidth: '90%', margin: '20px auto' }} alt="Logo" />
             <Divider />
             <Link to='/' className={link}>
                 <ListItem button
@@ -108,12 +112,12 @@ const Navigation = () => {
         <div className={root}>
             <Link to="/cart">
                 <IconButton
-                    className={cartIcon}>
+                    className={cartIconLarge}>
                     {
                         cartItemCount > 0 ?
                             <ShoppingCart style={{ color: '#059033', fontSize: 40 }} /> :
                             <AddShoppingCart style={{ color: '#059033', fontSize: 40 }} />
-                    } <span className={cartCount}>{cartItemCount}</span>
+                    } <span className={cartCountLarge}>{cartItemCount}</span>
                 </IconButton>
             </Link>
             {scrollNav &&
@@ -122,7 +126,7 @@ const Navigation = () => {
                 </IconButton>}
             <nav className={navbarMain}>
                 <AppBar className={appBar}>
-                    <Toolbar>
+                    <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
@@ -132,6 +136,16 @@ const Navigation = () => {
                         >
                             <MenuIcon />
                         </IconButton>
+                        <Link to="/cart">
+                            <IconButton
+                            >
+                                {
+                                    cartItemCount > 0 ?
+                                        <ShoppingCart className={cartIconSmall} /> :
+                                        <AddShoppingCart className={cartIconSmall} />
+                                } <span className={cartCountSmall}>{cartItemCount}</span>
+                            </IconButton>
+                        </Link>
                     </Toolbar>
                 </AppBar>
                 <Hidden mdUp implementation="css">
@@ -150,7 +164,7 @@ const Navigation = () => {
                     </Drawer>
                 </Hidden>
                 <Container className={navbar} style={{ height: scrollNav ? 60 : 80 }}>
-                    <img src='' onClick={toggleHome} style={{ maxWidth: 250, flex: 1, cursor: 'pointer' }} alt="Logo" />
+                    <img src={logo} onClick={toggleHome} style={{ maxWidth: scrollNav ? 100 : 140, flex: 1, cursor: 'pointer' }} alt="Logo" />
                     <div style={{ flex: 3, textAlign: 'right' }}>
                         <span>
                             <Link className={link} to='/'>
@@ -173,6 +187,17 @@ const Navigation = () => {
                                         </Link>
                                     </ScrollLink>)
                             }
+                            <Link to="/cart">
+                                <IconButton
+                                    className={cartIconSmall}
+                                >
+                                    {
+                                        cartItemCount > 0 ?
+                                            <ShoppingCart className={cartIconSmall} /> :
+                                            <AddShoppingCart className={cartIconSmall} />
+                                    } <span className={cartCountSmall}>{cartItemCount}</span>
+                                </IconButton>
+                            </Link>
                         </span>
                     </div>
                 </Container>

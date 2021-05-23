@@ -5,7 +5,7 @@ import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 
 const About = () => {
   return (
-    <section id="about-us">
+    <section id="about-us" style={{ background: '#fff' }}>
       <Container>
         <SectionTitle title="ABOUT US" slogan="We Provide Better" />
         <Grid container>
