@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { Button, Container } from '@material-ui/core';
+import { Avatar, Button, Container } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll';
 import useStyles from './NavigationStyle';
@@ -50,11 +50,14 @@ const Navigation = () => {
         cartIconSmall,
         cartCountLarge,
         cartCountSmall } = useStyles()
-    const { cartItemCount } = useMyContext();
+    const { cartItemCount, logout, currentUser } = useMyContext();
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    const logoutHandler = () => {
+        logout()
+    }
     // animated scroll
     const [scrollNav, setScrollNav] = useState(false);
 
@@ -198,6 +201,8 @@ const Navigation = () => {
                                     } <span className={cartCountSmall}>{cartItemCount}</span>
                                 </IconButton>
                             </Link>
+                            <Avatar src={currentUser?.photoURL} style={{ display: 'inline-block', marginBottom: -15 }}></Avatar>
+                            <Button onClick={logoutHandler} variant="contained">Logout</Button>
                         </span>
                     </div>
                 </Container>

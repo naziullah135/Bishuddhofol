@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cartIconLarge: {
         position: 'fixed',
-        top: '30vh',
+        top: '50vh',
         right: '5px',
         '@media(max-width:960px)': {
             display: 'none'

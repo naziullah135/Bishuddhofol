@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react"
+import { auth, googleProvider } from "./lib/firebase";
 
 
 const MyContext = createContext()
@@ -10,6 +11,32 @@ export const useMyContext = () => {
 
 export const ContextProvider = ({ children }) => {
 
+    const [currentUser, setCurrentUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const signup = (email, password) => {
+        return auth.createUserWithEmailAndPassword(email, password);
+    }
+
+    const login = (email, password) => {
+        return auth.signInWithEmailAndPassword(email, password);
+    }
+
+    const googleSignIn = () => {
+        return auth.signInWithPopup(googleProvider);
+    }
+
+    const logout = () => {
+        return auth.signOut();
+    }
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            setCurrentUser(user)
+            setLoading(false)
+        })
+        return unsubscribe;
+    }, [])
     // const [cartItems, setCartItems] = useState([])
     // useEffect(() => {
     //     const carts = JSON.parse(localStorage.getItem('cart')) || [];
@@ -30,16 +57,28 @@ export const ContextProvider = ({ children }) => {
 
     const [updatedCart, setUpdatedCart] = useState([])
     const [cartItemCount, setCartItemCount] = useState(cartItems.length || 0);
+    const [addresses, setAddresses] = useState([]);
+    const [currentAddress, setCurrentAddress] = useState({});
     const value = {
+        currentUser,
+        setCurrentUser,
+        signup,
+        login,
+        googleSignIn,
+        logout,
         cartItemCount,
         setCartItemCount,
         cartItems,
         updatedCart,
-        setUpdatedCart
+        setUpdatedCart,
+        addresses,
+        setAddresses,
+        currentAddress,
+        setCurrentAddress
     }
     return (
         <MyContext.Provider value={value}>
-            {children}
+            {!loading && children}
         </MyContext.Provider>
     )
 }

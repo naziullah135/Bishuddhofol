@@ -1,4 +1,4 @@
-import { Container, IconButton, Table, TableBody, TableCell, TableContainer, TableRow, Button, Typography, Paper, Grid } from '@material-ui/core';
+import { Container, Button, Typography, Paper, Grid } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -22,7 +22,7 @@ const Cart = () => {
             })
     }, [cartItems])
 
-    const deliveryCharge = 20;
+    // const deliveryCharge = 20;
 
     const changeCart = (id, increase) => {
         const cartItems = JSON.parse(localStorage.getItem('cartItems'));
@@ -32,14 +32,12 @@ const Cart = () => {
     }
 
     // update quantity 
-    useEffect(() => {
-        const newCartItems = cartData.map(item => {
-            cartItems.map(cartItem => (item.id === cartItem.id) && (item.quantity = cartItem.quantity))
-            return item;
-        })
-        console.log(newCartItems);
-        setUpdatedCart(newCartItems)
-    }, [])
+    const newCartItems = cartData;
+    newCartItems.map(item => {
+        cartItems.map(cartItem => (item.id === cartItem.id) && (item.quantity = cartItem.quantity))
+        return item;
+    })
+    setUpdatedCart(newCartItems)
 
     // const getSubTotal = () => {
     // return 
