@@ -137,6 +137,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         top: '50vh',
         right: '5px',
+        zIndex: 10,
         '@media(max-width:960px)': {
             display: 'none'
         }

@@ -19,30 +19,6 @@ const App = () => {
         main: '#059033',
       },
     },
-    typography: {
-      // fontFamily:'',
-      // h2: {
-      //   fontWeight: 600,
-      // },
-    },
-    overrides: {
-      MuiCssBaseline: {
-        '@global': {
-          '*::-webkit-scrollbar': {
-            width: '12px !important'
-          },
-          '*::-webkit-scrollbar-track': {
-            background: 'orange !important'
-          },
-          '*::-webkit-scrollbar-thumb': {
-            background: 'blue',
-            borderRadius: 20,
-            border: '3px solid orange'
-          }
-        },
-      },
-    },
-
   });
   return (
     <ThemeProvider theme={theme}>
@@ -52,7 +28,6 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/cart" component={Cart} />
-            {/* <Route exact path="/checkout" component={Checkout} /> */}
             <Route exact path="/login" component={LoginSignUp} />
             <Route exact path="/signup" component={LoginSignUp} />
             <PrivateRoute>
