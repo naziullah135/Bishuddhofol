@@ -41,10 +41,11 @@ const useStyles = makeStyles((theme) => ({
     },
     navbarMain: {
         position: 'fixed',
+        top: 0,
         width: '100%',
         justifyContent: 'space-between',
         zIndex: 999,
-        background: 'rgba(0,0,0,.8)',
+        background: 'rgba(0,0,0,.9)',
     },
     appBar: {
         background: 'rgba(0,0,0,.8)',
@@ -95,13 +96,14 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         right: 30,
         bottom: 30,
-        background: 'rgba(0,0,0,.8)',
+        zIndex: 5,
+        background: 'rgba(5, 144, 51,.7)',
         transition: '.3s linear',
         '&:hover': {
-            background: 'rgba(0,0,0,1)'
+            background: '#059033'
         }
     },
-    cartCount: {
+    cartCountLarge: {
         position: 'absolute',
         left: 47,
         top: 5,
@@ -114,12 +116,38 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        fontWeight: 700,
+    },
+    cartCountSmall: {
+        position: 'absolute',
+        left: 30,
+        top: 5,
+        color: '#fff',
+        background: '#ff0000',
+        borderRadius: '50%',
+        fontSize: 16,
+        height: 20,
+        width: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         fontWeight: 700
     },
-    cartIcon: {
+    cartIconLarge: {
         position: 'fixed',
         top: '50vh',
-        right: '5px'
+        right: '5px',
+        zIndex: 10,
+        '@media(max-width:960px)': {
+            display: 'none'
+        }
+    },
+    cartIconSmall: {
+        color: '#a8a8a9',
+        transition: '.3s',
+        '&:hover': {
+            color: '#fff'
+        }
     }
 }));
 

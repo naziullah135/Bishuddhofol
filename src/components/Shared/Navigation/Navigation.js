@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { Button, Container } from '@material-ui/core';
+import { Avatar, Button, Container } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll';
 import useStyles from './NavigationStyle';
@@ -16,10 +16,11 @@ import { ArrowUpward } from '@material-ui/icons';
 import AddShoppingCart from '@material-ui/icons/AddShoppingCartOutlined';
 import ShoppingCart from '@material-ui/icons/ShoppingCartOutlined';
 import { useMyContext } from '../../../context';
+import logo from '../../../images/logo.png'
 const scrollNavItems = [
     {
         label: 'About us',
-        path: ''
+        path: 'about-us'
     },
     {
         label: 'Shop',
@@ -45,14 +46,18 @@ const Navigation = () => {
         navbarMain,
         backToTop,
         cartCount,
-        cartIcon } = useStyles()
-    const { cartItemCount, cartItems } = useMyContext();
-    console.log(cartItemCount);
-    // const cartItems = JSON.parse(localStorage.getItem('cart'));
+        cartIconLarge,
+        cartIconSmall,
+        cartCountLarge,
+        cartCountSmall } = useStyles()
+    const { cartItemCount, logout, currentUser } = useMyContext();
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    const logoutHandler = () => {
+        logout()
+    }
     // animated scroll
     const [scrollNav, setScrollNav] = useState(false);
 
@@ -72,7 +77,7 @@ const Navigation = () => {
 
     const drawer = (
         <div style={{ textAlign: 'center' }}>
-            <img src='' onClick={toggleHome} style={{ maxWidth: '90%', margin: '20px auto' }} alt="Logo" />
+            <img src={logo} onClick={toggleHome} style={{ maxWidth: '90%', margin: '20px auto' }} alt="Logo" />
             <Divider />
             <Link to='/' className={link}>
                 <ListItem button
@@ -91,7 +96,7 @@ const Navigation = () => {
                         spy={true}
                         smooth={true}
                         exact='true'
-                        offset={0}
+                        offset={60}
                         duration={500}>
                         <Link style={{ textDecoration: 'none' }} to='/'>
                             <ListItem
@@ -110,12 +115,12 @@ const Navigation = () => {
         <div className={root}>
             <Link to="/cart">
                 <IconButton
-                    className={cartIcon}>
+                    className={cartIconLarge}>
                     {
-                        cartItemCount.length > 0 ?
-                            <ShoppingCart style={{ color: '#58BC34', fontSize: 40 }} /> :
-                            <AddShoppingCart style={{ color: '#58BC34', fontSize: 40 }} />
-                    } <span className={cartCount}>{cartItems ? cartItems.length : 0}</span>
+                        cartItemCount > 0 ?
+                            <ShoppingCart style={{ color: '#059033', fontSize: 40 }} /> :
+                            <AddShoppingCart style={{ color: '#059033', fontSize: 40 }} />
+                    } <span className={cartCountLarge}>{cartItemCount}</span>
                 </IconButton>
             </Link>
             {scrollNav &&
@@ -124,7 +129,7 @@ const Navigation = () => {
                 </IconButton>}
             <nav className={navbarMain}>
                 <AppBar className={appBar}>
-                    <Toolbar>
+                    <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
@@ -134,6 +139,16 @@ const Navigation = () => {
                         >
                             <MenuIcon />
                         </IconButton>
+                        <Link to="/cart">
+                            <IconButton
+                            >
+                                {
+                                    cartItemCount > 0 ?
+                                        <ShoppingCart className={cartIconSmall} /> :
+                                        <AddShoppingCart className={cartIconSmall} />
+                                } <span className={cartCountSmall}>{cartItemCount}</span>
+                            </IconButton>
+                        </Link>
                     </Toolbar>
                 </AppBar>
                 <Hidden mdUp implementation="css">
@@ -152,7 +167,7 @@ const Navigation = () => {
                     </Drawer>
                 </Hidden>
                 <Container className={navbar} style={{ height: scrollNav ? 60 : 80 }}>
-                    <img src='' onClick={toggleHome} style={{ maxWidth: 250, flex: 1, cursor: 'pointer' }} alt="Logo" />
+                    <img src={logo} onClick={toggleHome} style={{ maxWidth: scrollNav ? 100 : 140, flex: 1, cursor: 'pointer' }} alt="Logo" />
                     <div style={{ flex: 3, textAlign: 'right' }}>
                         <span>
                             <Link className={link} to='/'>
@@ -166,7 +181,7 @@ const Navigation = () => {
                                         spy={true}
                                         smooth={true}
                                         exact='true'
-                                        offset={0}
+                                        offset={-85}
                                         duration={500}>
                                         <Link style={{ textDecoration: 'none' }} to='/'>
                                             <Button>
@@ -175,6 +190,19 @@ const Navigation = () => {
                                         </Link>
                                     </ScrollLink>)
                             }
+                            <Link to="/cart">
+                                <IconButton
+                                    className={cartIconSmall}
+                                >
+                                    {
+                                        cartItemCount > 0 ?
+                                            <ShoppingCart className={cartIconSmall} /> :
+                                            <AddShoppingCart className={cartIconSmall} />
+                                    } <span className={cartCountSmall}>{cartItemCount}</span>
+                                </IconButton>
+                            </Link>
+                            <Avatar src={currentUser?.photoURL} style={{ display: 'inline-block', marginBottom: -15 }}></Avatar>
+                            <Button onClick={logoutHandler} variant="contained">Logout</Button>
                         </span>
                     </div>
                 </Container>
